@@ -9,38 +9,40 @@ def ejercicio1():
     plt.plot(arr)
     plt.show()
 
+def calculaRadian(t, size):
+    if t == 0:
+        return 0
+    if t == size:
+        return 0
+    else:
+        radian = 2*np.pi * t / size
+        return radian
+
 def ejercicio2():
     size = 44100
-    arr = np.linspace(0, size, size)
-    t = 0
-    for i in range(size - 1):
-        arr[i] = np.sin(2*np.pi) * t
-        t = t + 1
-   
+    f = 3
+    t = 2
+    arr = np.linspace(0, size, size * f)
+
+    for i in range(size * f):
+        radian = calculaRadian(i, size * t)
+        arr[i] = np.sin(radian)
+
     plt.plot(arr)
-    plt.xlabel('Angle [rad]')
-    plt.ylabel('sin(x)')
-    plt.axis('tight')
     plt.show()
-    '''x = np.linspace(-np.pi, np.pi, 201)
-    plt.plot(x, np.sin(x))
-    plt.xlabel('Angle [rad]')
-    plt.ylabel('sin(x)')
-    plt.axis('tight')
-    plt.show()'''
 
 def dibujaOnda(muestra):
     x = np.linspace(0, len(muestra) / SRATE, num=len(muestra))
     y = muestra
     plt.plot(x, y)
-    plt.xlabel('Tiempo')
-    plt.ylabel('Intensidad')
-    plt.axis('tight')
     plt.show()
 
 def osc(f, d:float, fase = 0):
     #calcular el eje x
-    x = np.linspace(0, d, SRATE * d)
+    cantidad = SRATE
+    if d >= 1:
+        cantidad = SRATE * (int)(d)
+    x = np.linspace(0, d, cantidad)
     lmbd = 1 / f
     # calcular el seno
     y = np.sin((2*np.pi * x) / lmbd + fase)
@@ -131,8 +133,8 @@ def ejercicio6():
     dibujaOnda(muestra)
 
 #ejercicio1()
-ejercicio2()
+#ejercicio2()
 #ejercicio3()
 #ejercicio4()
 #ejercicio5()
-#ejercicio6()
+ejercicio6()
